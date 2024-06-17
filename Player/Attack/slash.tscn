@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d050jrifvk2eh"]
+
+[ext_resource type="Script" path="res://Player/Attack/slash.cs" id="1_mhp13"]
+[ext_resource type="Texture2D" uid="uid://dpb14kwk5ji8v" path="res://Textures/Items/Weapons/Slash.png" id="2_fg4uu"]
+[ext_resource type="AudioStream" uid="uid://bmwxy48vd6o0b" path="res://Audio/SoundEffect/ice.wav" id="3_ylcc1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jenb"]
+size = Vector2(5, 10)
+
+[node name="Slash" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_mhp13")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_fg4uu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_6jenb")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+autostart = true
+
+[node name="snd_play" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ylcc1")
+volume_db = -18.311
+pitch_scale = 3.0
+autoplay = true
+bus = &"Sfx"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

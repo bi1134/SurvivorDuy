@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://8eam423c0m2n"]
+
+[ext_resource type="Script" path="res://Utility/enemy_spawner.cs" id="1_6v2cr"]
+[ext_resource type="Script" path="res://Utility/spawn_info.cs" id="2_8mno0"]
+[ext_resource type="PackedScene" uid="uid://c4tm58cb8kdcn" path="res://Enemy/enemy_kobold_weak.tscn" id="2_xbw7g"]
+
+[sub_resource type="Resource" id="Resource_ng4vw"]
+script = ExtResource("2_8mno0")
+time_start = 0
+time_end = 60
+enemy = ExtResource("2_xbw7g")
+enemy_num = 1
+enemy_spawn_delay = 1
+
+[node name="EnemySpawner" type="Node2D"]
+script = ExtResource("1_6v2cr")
+spawns = [SubResource("Resource_ng4vw")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,217 @@
+[gd_scene load_steps=19 format=3 uid="uid://c5xbi6bithfdy"]
+
+[ext_resource type="Script" path="res://Enemy/Boss.cs" id="1_mwjr0"]
+[ext_resource type="Texture2D" uid="uid://cjik6a8av2gkf" path="res://Textures/Enemy/giant_amoeba_new.png" id="2_hhv0v"]
+[ext_resource type="PackedScene" uid="uid://dvrgaw3e8c8yn" path="res://Object/win_gate.tscn" id="2_w8n6l"]
+[ext_resource type="PackedScene" uid="uid://bhcratnlrpdmg" path="res://Utility/hurt_box.tscn" id="3_lhm1v"]
+[ext_resource type="PackedScene" uid="uid://demvjum2m4tgh" path="res://Utility/hit_box.tscn" id="4_hq3pl"]
+[ext_resource type="AudioStream" uid="uid://dt6p0rhwrb10a" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_id30e"]
+[ext_resource type="PackedScene" uid="uid://drnjkivg04b0j" path="res://Enemy/boss_health_bar.tscn" id="7_sp5of"]
+[ext_resource type="FontFile" uid="uid://62jlwtt46vvc" path="res://Font/StayPixel-Regular.ttf" id="7_xee4u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s33eh"]
+
+[sub_resource type="Animation" id="Animation_kmxak"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_t0xua"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8tr5t"]
+_data = {
+"RESET": SubResource("Animation_kmxak"),
+"walk": SubResource("Animation_t0xua")
+}
+
+[sub_resource type="Animation" id="Animation_uxt75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_imo37"]
+resource_name = "hitflash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbfb3"]
+_data = {
+"RESET": SubResource("Animation_uxt75"),
+"hitflash": SubResource("Animation_imo37")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_js5bt"]
+size = Vector2(125, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rkbi"]
+size = Vector2(93, 92)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rx3jx"]
+radius = 307.059
+
+[node name="enemy_super" type="CharacterBody2D" groups=["boss"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_mwjr0")
+hp = 50.0
+knockback_recovery = 9999.0
+experience = 10000
+enemy_damage = 52
+winGateScene = ExtResource("2_w8n6l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("2_hhv0v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_s33eh")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8tr5t")
+}
+
+[node name="HitFlashAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xbfb3")
+}
+
+[node name="HurtBox" parent="." instance=ExtResource("3_lhm1v")]
+collision_layer = 4
+collision_mask = 4
+hitBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_js5bt")
+
+[node name="HitBox" parent="." instance=ExtResource("4_hq3pl")]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(-2.5, 5)
+shape = SubResource("RectangleShape2D_6rkbi")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_id30e")
+volume_db = -11.755
+bus = &"Sfx"
+
+[node name="healthShow" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="healthShow"]
+shape = SubResource("CircleShape2D_rx3jx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthPanel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+
+[node name="Label" type="Label" parent="CanvasLayer/HealthPanel"]
+layout_mode = 0
+offset_left = -36.0
+offset_top = -28.0
+offset_right = 37.0
+offset_bottom = -5.0
+theme_override_fonts/font = ExtResource("7_xee4u")
+theme_override_font_sizes/font_size = 24
+text = "Amoeba"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BossHealthBar" parent="CanvasLayer/HealthPanel" instance=ExtResource("7_sp5of")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -2.0
+offset_right = 60.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.5, 1.5)
+
+[node name="Attack" type="Node2D" parent="."]
+
+[node name="IceSpearTimer" type="Timer" parent="Attack"]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
+unique_name_in_owner = true
+wait_time = 0.075
+
+[connection signal="Hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="body_entered" from="healthShow" to="." method="_on_health_show_body_entered"]
+[connection signal="body_exited" from="healthShow" to="." method="_on_health_show_body_exited"]
+[connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

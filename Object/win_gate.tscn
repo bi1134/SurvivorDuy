@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvrgaw3e8c8yn"]
+
+[ext_resource type="Script" path="res://Object/win_gate.cs" id="1_7iwxg"]
+[ext_resource type="Texture2D" uid="uid://cyghto2isvejy" path="res://Textures/mapText/door.png" id="1_esjvh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clnd3"]
+radius = 109.005
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl3a2"]
+size = Vector2(23, 44)
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(8, -2)
+texture = ExtResource("1_esjvh")
+hframes = 2
+script = ExtResource("1_7iwxg")
+
+[node name="OpenDetection" type="Area2D" parent="."]
+
+[node name="RoundShape" type="CollisionShape2D" parent="OpenDetection"]
+position = Vector2(-8, 2)
+shape = SubResource("CircleShape2D_clnd3")
+
+[node name="EnterChangeScene" type="Area2D" parent="."]
+
+[node name="DoorShape" type="CollisionShape2D" parent="EnterChangeScene"]
+position = Vector2(-8.5, 0)
+shape = SubResource("RectangleShape2D_xl3a2")
+
+[connection signal="body_entered" from="OpenDetection" to="." method="_on_open_detection_body_entered"]
+[connection signal="body_exited" from="OpenDetection" to="." method="_on_open_detection_body_exited"]
+[connection signal="body_entered" from="EnterChangeScene" to="." method="_on_enter_change_scene_body_entered"]

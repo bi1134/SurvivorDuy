@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://dmru8kla2ro2w"]
+
+[ext_resource type="Script" path="res://World/world_map.cs" id="1_w4w47"]
+[ext_resource type="Texture2D" uid="uid://defhdcwxjhan8" path="res://Utility/player_sprite.png" id="2_6w5im"]
+[ext_resource type="Texture2D" uid="uid://4gkivmr30lb4" path="res://World/WorldMap2.png" id="2_shmpe"]
+[ext_resource type="Script" path="res://World/WorldMapLevel.cs" id="3_6ud2q"]
+[ext_resource type="Texture2D" uid="uid://c70x24h06om2q" path="res://Textures/mapText/locked.png" id="3_dadhj"]
+[ext_resource type="PackedScene" uid="uid://bk3d65b038yry" path="res://Utility/base_button.tscn" id="6_mhl33"]
+[ext_resource type="Texture2D" uid="uid://cs57uaiovqt3s" path="res://Textures/GUI/BackButton.png" id="7_lc8e4"]
+
+[sub_resource type="Animation" id="Animation_kue5y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vvelp"]
+resource_name = "mapAnim"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dp8jh"]
+_data = {
+"RESET": SubResource("Animation_kue5y"),
+"mapAnim": SubResource("Animation_vvelp")
+}
+
+[node name="WorldMap" type="Node2D"]
+script = ExtResource("1_w4w47")
+
+[node name="BGcolor" type="ColorRect" parent="."]
+offset_left = -2075.0
+offset_top = -1747.0
+offset_right = -1675.0
+offset_bottom = -1347.0
+scale = Vector2(10, 10)
+color = Color(0.12549, 0.839216, 0.780392, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(316, -378)
+texture = ExtResource("2_shmpe")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_dp8jh")
+}
+
+[node name="LevelHolder" type="Node2D" parent="."]
+position = Vector2(3, 3)
+
+[node name="Map1" type="Node2D" parent="LevelHolder" node_paths=PackedStringArray("right")]
+position = Vector2(-3, -1.6)
+scale = Vector2(2.9, 2.9)
+script = ExtResource("3_6ud2q")
+right = NodePath("../Map2")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelHolder/Map1"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dadhj")
+
+[node name="Map2" type="Node2D" parent="LevelHolder" node_paths=PackedStringArray("up", "left")]
+position = Vector2(200.5, -2.5)
+scale = Vector2(2.9, 2.9)
+script = ExtResource("3_6ud2q")
+up = NodePath("../Map3")
+left = NodePath("../Map1")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelHolder/Map2"]
+position = Vector2(0.5, -0.5)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dadhj")
+
+[node name="Map3" type="Node2D" parent="LevelHolder" node_paths=PackedStringArray("down")]
+position = Vector2(199, -168)
+scale = Vector2(2.9, 2.9)
+script = ExtResource("3_6ud2q")
+down = NodePath("../Map2")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelHolder/Map3"]
+position = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dadhj")
+
+[node name="playerPanel" type="Panel" parent="."]
+
+[node name="playerSprite" type="Sprite2D" parent="playerPanel"]
+position = Vector2(2, -17)
+scale = Vector2(2, 2)
+texture = ExtResource("2_6w5im")
+hframes = 5
+
+[node name="Camera2D" type="Camera2D" parent="playerPanel/playerSprite"]
+
+[node name="lvl_timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" parent="CanvasLayer" instance=ExtResource("6_mhl33")]
+offset_left = 23.0
+offset_top = 63.0
+offset_right = 103.0
+offset_bottom = 101.0
+text = ""
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button"]
+layout_mode = 0
+offset_right = 81.0
+offset_bottom = 39.0
+texture = ExtResource("7_lc8e4")
+
+[connection signal="clickEnd" from="CanvasLayer/Button" to="." method="_on_button_click_end"]

@@ -1,0 +1,124 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjmgmpo4prra0"]
+
+[ext_resource type="Script" path="res://TitleScreen/menu.cs" id="1_g0t70"]
+[ext_resource type="FontFile" uid="uid://62jlwtt46vvc" path="res://Font/StayPixel-Regular.ttf" id="1_r0axr"]
+[ext_resource type="Texture2D" uid="uid://cx4evais40260" path="res://backrground.png" id="2_m3xwi"]
+[ext_resource type="PackedScene" uid="uid://bk3d65b038yry" path="res://Utility/base_button.tscn" id="2_np2wc"]
+[ext_resource type="Texture2D" uid="uid://comsjpy5j0byi" path="res://Textures/GUI/btn_play.png" id="5_f852p"]
+[ext_resource type="Texture2D" uid="uid://di3kplqnb88ww" path="res://Textures/GUI/btn_setting.png" id="6_sttxt"]
+[ext_resource type="Texture2D" uid="uid://dda5taiyujb28" path="res://Textures/GUI/btn_exit.png" id="7_qrykq"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_g0t70")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -39.0
+offset_top = -47.0
+offset_right = 1881.0
+offset_bottom = 1153.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_m3xwi")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 640.0
+offset_bottom = 110.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_r0axr")
+theme_override_font_sizes/font_size = 72
+text = "Survivors Duy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_play" parent="." instance=ExtResource("2_np2wc")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 145.0
+offset_right = 420.0
+offset_bottom = 205.0
+scale = Vector2(0.75, 0.75)
+text = "PLAY"
+flat = true
+
+[node name="btn_rect" type="TextureRect" parent="btn_play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_f852p")
+
+[node name="btn_setting" parent="." instance=ExtResource("2_np2wc")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 215.0
+offset_right = 420.0
+offset_bottom = 275.0
+scale = Vector2(0.75, 0.75)
+text = "SETTING
+"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="btn_setting"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_sttxt")
+
+[node name="btn_exit" parent="." instance=ExtResource("2_np2wc")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 260.0
+offset_top = 285.0
+offset_right = 420.0
+offset_bottom = 345.0
+scale = Vector2(0.75, 0.75)
+text = "EXIT
+"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="btn_exit"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -30.0
+offset_right = 80.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_qrykq")
+
+[connection signal="clickEnd" from="btn_play" to="." method="_on_btn_play_click_end"]
+[connection signal="clickEnd" from="btn_setting" to="." method="_on_btn_setting_click_end"]
+[connection signal="pressed" from="btn_setting" to="." method="_on_btn_setting_pressed"]
+[connection signal="clickEnd" from="btn_exit" to="." method="_on_btn_exit_click_end"]

@@ -1,0 +1,17 @@
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\Survivors Clone.deps.json
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\Survivors Clone.runtimeconfig.json
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\Survivors Clone.dll
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\Survivors Clone.pdb
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\GodotSharp.dll
+D:\Survivors Clone\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.csproj.AssemblyReference.cache
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.GeneratedMSBuildEditorConfig.editorconfig
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.AssemblyInfoInputs.cache
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.AssemblyInfo.cs
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.csproj.CoreCompileInputs.cache
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.csproj.CopyComplete
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.dll
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\refint\Survivors Clone.dll
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.pdb
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.genruntimeconfig.cache
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\ref\Survivors Clone.dll

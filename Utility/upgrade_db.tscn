@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://33lfb3n8vexl"]
+
+[ext_resource type="Script" path="res://Utility/upgrade_db.cs" id="1_dpr5m"]
+
+[node name="UpgradeDB" type="Node"]
+script = ExtResource("1_dpr5m")

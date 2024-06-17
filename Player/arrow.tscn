@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://n5bsutug1eo7"]
+
+[ext_resource type="Texture2D" uid="uid://by1amnsev220f" path="res://Textures/Player/arrow.png" id="1_kkiav"]
+[ext_resource type="Script" path="res://Player/arrow.cs" id="1_tjo8r"]
+
+[node name="arrow" type="Area2D"]
+script = ExtResource("1_tjo8r")
+
+[node name="arrowPivot" type="Marker2D" parent="."]
+
+[node name="point" type="Sprite2D" parent="arrowPivot"]
+position = Vector2(17, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_kkiav")

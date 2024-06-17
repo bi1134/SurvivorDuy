@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx8d6q2e614g8"]
+
+[ext_resource type="Script" path="res://Player/Attack/hurtZone.cs" id="1_qwnrn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vqac6"]
+radius = 65.0019
+
+[sub_resource type="Curve" id="Curve_io5m6"]
+_data = [Vector2(0.0706522, 1), 0.0, 0.0, 0, 0, Vector2(0.945652, 0.637363), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="HurtZone" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_qwnrn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_vqac6")
+
+[node name="damageTimer" type="Timer" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 500
+lifetime = 0.5
+speed_scale = 0.5
+emission_shape = 2
+emission_sphere_radius = 65.0
+gravity = Vector2(0, -100)
+radial_accel_min = 40.0
+radial_accel_max = 50.0
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_io5m6")
+color = Color(0, 0.686275, 0.317647, 1)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="damageTimer" to="." method="_on_damage_timer_timeout"]

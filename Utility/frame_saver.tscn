@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cshj212q1pd1j"]
+
+[ext_resource type="Script" path="res://Utility/frame_saver.cs" id="1_xfc28"]
+
+[node name="FrameSaver" type="Node"]
+script = ExtResource("1_xfc28")
+
+[node name="Timer" type="Timer" parent="."]

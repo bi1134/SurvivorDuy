@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmugdesgud4u8"]
+
+[ext_resource type="Script" path="res://TitleScreen/levelSelect.cs" id="1_ranqh"]
+[ext_resource type="Texture2D" uid="uid://cx4evais40260" path="res://backrground.png" id="2_lycn7"]
+[ext_resource type="FontFile" uid="uid://62jlwtt46vvc" path="res://Font/StayPixel-Regular.ttf" id="3_n67lu"]
+[ext_resource type="PackedScene" uid="uid://bk3d65b038yry" path="res://Utility/base_button.tscn" id="4_d1y1k"]
+[ext_resource type="Texture2D" uid="uid://ds6h71nn2aiw5" path="res://Textures/grassy.png" id="5_w1otj"]
+[ext_resource type="Texture2D" uid="uid://1idiqmafq3d0" path="res://Textures/mapText/Dirt.png" id="6_hm5vv"]
+
+[node name="levelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ranqh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.360784, 0.360784, 0.360784, 1)
+layout_mode = 0
+offset_left = -156.0
+offset_top = -80.0
+offset_right = 868.0
+offset_bottom = 447.0
+texture = ExtResource("2_lycn7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 628.0
+offset_bottom = 283.0
+color = Color(0.313726, 0.219608, 0.266667, 1)
+
+[node name="scene_lbl" type="Label" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("3_n67lu")
+theme_override_font_sizes/font_size = 72
+text = "MAP SELECT
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="level" type="Label" parent="."]
+layout_mode = 0
+offset_left = 293.0
+offset_top = 90.0
+offset_right = 348.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("3_n67lu")
+theme_override_font_sizes/font_size = 20
+text = "level 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_play" parent="." instance=ExtResource("4_d1y1k")]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 220.0
+offset_top = 120.0
+offset_right = 420.0
+offset_bottom = 220.0
+text = "
+"
+
+[node name="TextureRect" type="TextureRect" parent="btn_play"]
+layout_mode = 0
+offset_right = 201.0
+offset_bottom = 101.0
+texture = ExtResource("5_w1otj")
+
+[node name="btn_play2" parent="." instance=ExtResource("4_d1y1k")]
+visible = false
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 0
+offset_left = 569.0
+offset_top = 118.0
+offset_right = 769.0
+offset_bottom = 218.0
+text = "
+"
+
+[node name="TextureRect" type="TextureRect" parent="btn_play2"]
+layout_mode = 0
+offset_right = 201.0
+offset_bottom = 101.0
+texture = ExtResource("6_hm5vv")
+
+[node name="return_Button" parent="." instance=ExtResource("4_d1y1k")]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 320.0
+offset_right = 560.0
+offset_bottom = 351.0
+text = "Return
+"
+
+[connection signal="clickEnd" from="btn_play" to="." method="_on_btn_play_click_end"]
+[connection signal="clickEnd" from="btn_play2" to="." method="_on_btn_play_click_end"]
+[connection signal="clickEnd" from="return_Button" to="." method="_on_button_click_end"]

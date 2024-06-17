@@ -1,0 +1,15 @@
+VisibleOnScreenEnabler2D
+Camera2D
+AnimationPlayer
+TileMap
+Timer
+Node
+Marker2D
+Label
+Node2D
+AnimationTree
+Area2D
+TextureRect
+ColorRect
+CPUParticles2D
+GPUParticles2D
