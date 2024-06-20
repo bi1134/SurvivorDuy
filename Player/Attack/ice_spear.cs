@@ -9,6 +9,9 @@ public partial class ice_spear : Area2D
 	public float damage = 5;
 	public int knockback_amount = 100;
 	public float attack_size = 1.0f;
+	public float damageReductionRate = 0.3f; //higher = faster damage got reducted
+	private float timeElapsed = 0;
+
 
 	public Vector2 target = Vector2.Zero;
 	public Vector2 angle = Vector2.Zero;
@@ -62,6 +65,10 @@ public partial class ice_spear : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Position += angle.Normalized() * (float)(speed * delta);
+
+		timeElapsed += (float)delta;
+
+		damage = Math.Max(1, damage - timeElapsed * damageReductionRate);
 	}
 
 	public void EnemyHits(int charge = 1)

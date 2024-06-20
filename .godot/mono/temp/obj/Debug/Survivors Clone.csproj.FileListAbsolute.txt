@@ -15,3 +15,4 @@ D:\Survivors Clone\.godot\mono\temp\obj\Debug\refint\Survivors Clone.dll
 D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.pdb
 D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.genruntimeconfig.cache
 D:\Survivors Clone\.godot\mono\temp\obj\Debug\ref\Survivors Clone.dll
+D:\Survivors Clone\.godot\mono\temp\obj\Debug\Survivors Clone.sourcelink.json
